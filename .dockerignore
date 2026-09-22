@@ -1,0 +1,15 @@
+.git
+.venv
+.work
+.env*
+frontend/node_modules
+frontend/.next
+frontend/test-results
+frontend/tests
+backend/__pycache__
+backend/staticfiles
+**/__pycache__
+docs/screenshots
+backups
+DOCUMENTOS.pdf
+WhatsApp*.jpeg

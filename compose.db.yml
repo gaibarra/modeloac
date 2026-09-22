@@ -1,0 +1,19 @@
+name: modeloac-dev
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: modeloac
+      POSTGRES_USER: modeloac
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Definir POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5548:5432"
+    volumes:
+      - modeloac_dev_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U modeloac -d modeloac"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+volumes:
+  modeloac_dev_db:

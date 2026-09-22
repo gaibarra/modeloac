@@ -1,0 +1,15 @@
+.venv/
+.work/
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+__pycache__/
+*.pyc
+*.sqlite3
+backend/staticfiles/
+backend/media/
+backups/
+playwright-report/
+test-results/

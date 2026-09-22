@@ -1,0 +1,53 @@
+name: modeloac-prod
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: modeloac
+      POSTGRES_USER: modeloac
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Definir POSTGRES_PASSWORD}
+    volumes:
+      - modeloac_db:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U modeloac -d modeloac"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [private]
+  backend:
+    build:
+      context: .
+      dockerfile: infra/backend.Dockerfile
+    env_file: .env.production
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8188:8000"
+    restart: unless-stopped
+    init: true
+    networks: [private]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  frontend:
+    build:
+      context: .
+      dockerfile: infra/frontend.Dockerfile
+      args:
+        BACKEND_URL: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3108:3000"
+    restart: unless-stopped
+    init: true
+    networks: [private]
+volumes:
+  modeloac_db:
+networks:
+  private:
