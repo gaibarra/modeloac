@@ -44,3 +44,9 @@ La simulación energética utiliza `kW × horas/día × días × tarifa`. Introd
 Revisión de datos muestra el documento original autenticado y la transcripción. Corregir primero la ficha operativa y después documentar la verificación. Las solicitudes antiguas y los posibles trabajos repetidos se conservan para revisión. La bitácora registra usuario, fecha, campos anteriores y nuevos de las modificaciones realizadas por API. Los cambios de cuentas realizados por Django Admin tienen su propia bitácora del administrador.
 
 Los botones de impresión usan el diálogo de impresión del navegador. Para compartir listados formateados, usar PDF desde Reportes.
+
+## Consulta completa de mantenimiento
+
+En **Mantenimiento** se consultan juntos los trabajos del histórico importado y las órdenes creadas en la aplicación, ordenados por fecha descendente. Usa **Realizados** para ver tanto intervenciones históricas como órdenes completadas; el filtro **Origen** permite separarlas. La búsqueda incluye equipo, ubicación, trabajo, referencia y técnico.
+
+Cada fila indica su origen. Los históricos mantienen su referencia original, fecha y posibles repeticiones; su ficha es de consulta y conserva los costos literales sin asumir moneda. No se duplican como órdenes nuevas ni modifican la agenda. **Nueva orden de trabajo** continúa disponible para los roles autorizados.

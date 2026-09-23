@@ -1,0 +1,10 @@
+[Unit]
+Description=Respaldo diario de Modelo AC a las 03:15 de Mexico
+
+[Timer]
+OnCalendar=*-*-* 03:15:00 America/Mexico_City
+Persistent=true
+Unit=modeloac-backup.service
+
+[Install]
+WantedBy=timers.target
